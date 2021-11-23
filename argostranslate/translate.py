@@ -150,7 +150,7 @@ class PackageTranslation(ITranslation):
     def hypotheses(self, input_text, num_hypotheses):
         if self.translator is None:
             model_path = str(self.pkg.package_path / "model")
-            self.translator = ctranslate2.Translator(model_path, device=settings.device, intra_threads=16)
+            self.translator = ctranslate2.Translator(model_path, device=settings.device, intra_threads=2)
         paragraphs = ITranslation.split_into_paragraphs(input_text)
         info("paragraphs:", paragraphs)
         translated_paragraphs = []
@@ -417,12 +417,12 @@ def apply_packaged_translation(pkg, input_text, translator, num_hypotheses=4):
     info("tokenized", tokenized)
 
     # Translation
-    BATCH_SIZE = 32
+    BATCH_SIZE = 64
     translated_batches = translator.translate_batch(
         tokenized,
         replace_unknowns=True,
         max_batch_size=BATCH_SIZE,
-        beam_size=max(num_hypotheses, 4),
+        beam_size=2,
         num_hypotheses=num_hypotheses,
         length_penalty=0.2,
         return_scores=True,

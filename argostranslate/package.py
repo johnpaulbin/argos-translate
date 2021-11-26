@@ -11,6 +11,8 @@ from argostranslate import settings
 from argostranslate import utils
 from argostranslate.utils import info, error
 
+import os
+
 """
 ## `package` module example usage
 ```
@@ -216,6 +218,7 @@ def install_from_path(path):
             raise Exception("Not a valid Argos Model (must be a zip archive)")
         with zipfile.ZipFile(path, "r") as zip:
             zip.extractall(path=settings.package_data_dir)
+        os.remove(path)
 
 
 def uninstall(pkg):

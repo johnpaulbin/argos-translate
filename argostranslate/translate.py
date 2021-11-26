@@ -417,7 +417,7 @@ def apply_packaged_translation(pkg, input_text, translator, num_hypotheses=4):
     info("tokenized", tokenized)
 
     # Translation
-    BATCH_SIZE = 64
+    BATCH_SIZE = 16
     translated_batches = translator.translate_batch(
         tokenized,
         replace_unknowns=True,

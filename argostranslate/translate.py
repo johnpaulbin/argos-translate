@@ -422,7 +422,7 @@ def apply_packaged_translation(pkg, input_text, translator, num_hypotheses=4):
         tokenized,
         replace_unknowns=True,
         max_batch_size=BATCH_SIZE,
-        beam_size=2,
+        beam_size=4,
         num_hypotheses=num_hypotheses,
         length_penalty=0.2,
         return_scores=True,

@@ -150,7 +150,7 @@ class PackageTranslation(ITranslation):
     def hypotheses(self, input_text, num_hypotheses):
         if self.translator is None:
             model_path = str(self.pkg.package_path / "model")
-            self.translator = ctranslate2.Translator(model_path, device=settings.device, intra_threads=2)
+            self.translator = ctranslate2.Translator(model_path, device=settings.device, inter_threads=2, intra_threads=2)
         paragraphs = ITranslation.split_into_paragraphs(input_text)
         info("paragraphs:", paragraphs)
         translated_paragraphs = []
@@ -427,8 +427,6 @@ def apply_packaged_translation(pkg, input_text, translator, num_hypotheses=4):
         #sampling_topk=40,
         num_hypotheses=num_hypotheses,
         length_penalty=0.2,
-        inter_threads=2,
-        intra_threads=1,
         return_scores=True
     )
     info("translated_batches", translated_batches)

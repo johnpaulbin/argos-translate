@@ -427,6 +427,7 @@ def apply_packaged_translation(pkg, input_text, translator, num_hypotheses=4):
         sampling_topk=140,
         num_hypotheses=num_hypotheses,
         length_penalty=.1,
+        repetition_penalty=.45,
         return_scores=True
     )
     info("translated_batches", translated_batches)

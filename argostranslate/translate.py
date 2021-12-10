@@ -423,10 +423,10 @@ def apply_packaged_translation(pkg, input_text, translator, num_hypotheses=4):
         replace_unknowns=True,
         max_batch_size=BATCH_SIZE,
         beam_size=1,
-        sampling_temperature=0.1,
-        sampling_topk=90,
+        sampling_temperature=0.55,
+        sampling_topk=140,
         num_hypotheses=num_hypotheses,
-        length_penalty=.0,
+        length_penalty=.1,
         return_scores=True
     )
     info("translated_batches", translated_batches)
